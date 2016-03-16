@@ -1,0 +1,54 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+</head>
+
+<template name="stats">
+    {{> sAlert}}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                {{> statsBody}}
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="statsBody">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-6">
+                    <span class="fa fa-pie-chart"></span> Stats Central
+                </div>
+                <div class="col-xs-6 text-right">
+                    <a href="{{pathFor route='base'}}">
+                        <span class="fa fa-arrow-circle-left"></span> Back
+                    </a>
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Player</th>
+                <th>GP</th>
+                <th>W</th>
+                <th>L</th>
+                <th>%</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each stats}}
+            <tr>
+                <th scope="row">{{_id}}</th>
+                <td>{{played}}</td>
+                <td>{{win}}</td>
+                <td>{{loss}}</td>
+                <td>{{ratio}}%</td>
+            </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+</template>

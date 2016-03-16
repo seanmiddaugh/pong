@@ -1,0 +1,22 @@
+html, body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    margin-top: 1.5rem;
+}
+
+.match {
+    border: 0.1rem solid #ccc;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.match:last-of-type {
+    margin-bottom: 0;
+}
+
+a, a:hover {
+    text-decoration: none;
+    color: inherit;
+}

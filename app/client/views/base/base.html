@@ -1,0 +1,117 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+</head>
+
+<template name="base">
+    {{> sAlert}}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                {{> newMatch}}
+            </div>
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                {{> previousMatches}}
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="newMatch">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-6">
+                    <span class="fa fa-users"></span> New Match-up
+                </div>
+                <div class="col-xs-6 text-right">
+                    <a href="{{pathFor route='stats'}}">
+                        <span class="fa fa-pie-chart"></span> Stats
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-5 text-center">
+                    <form id="avengers">
+                        <h4>Avengers (Wall)</h4>
+                        {{> playerList}}
+                        {{> score}}
+                    </form>
+                </div>
+                <div class="col-sm-2 text-center">
+                    <h4>VS</h4>
+                </div>
+                <div class="col-sm-5 text-center">
+                    <form id="defenders">
+                        <h4>Defenders (Door)</h4>
+                        {{> playerList}}
+                        {{> score}}
+                    </form>
+                </div>
+                <div class="col-xs-12">
+                    <a href="#" class="btn btn-block btn-success match-submit">Submit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+
+<template name="previousMatches">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <span class="fa fa-history"></span>
+            Previous Matches (Last 15)
+        </div>
+        <div class="panel-body">
+            {{#if Template.subscriptionsReady}}
+            {{#each matches}}
+            <div class="match">
+                <div class="row">
+                    <div class="col-sm-5 text-center">
+                        <h4 class="{{championColour 'avengers'}}">Avengers (Wall)</h4>
+                        <div>{{formatPlayers avengers.players}}</div>
+                        <div>{{avengers.score}}</div>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <h4>VS</h4>
+                    </div>
+                    <div class="col-sm-5 text-center">
+                        <h4 class="{{championColour 'defenders'}}">Defenders (Door)</h4>
+                        <div>{{formatPlayers defenders.players}}</div>
+                        <div>{{defenders.score}}</div>
+                    </div>
+                    <div class="col-xs-12 text-center">
+                        <span class="fa fa-clock-o"></span>
+                        {{elapsedTime createdAt}}
+                        <a href="#" class="match-delete text-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+            {{else}}
+            No Matches Found
+            {{/each}}
+            {{else}}
+            Loading...
+            {{/if}}
+        </div>
+    </div>
+</template>
+
+<template name="playerList">
+    <div class="form-group">
+        <select id="players" name="players" class="form-control multiple-selection" multiple="multiple">
+            {{#each players}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+    </div>
+</template>
+
+<template name="score">
+    <div class="form-group">
+        <input type="number" class="form-control" id="score" name="score" placeholder="Final score">
+    </div>
+</template>
